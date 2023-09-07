@@ -3,8 +3,6 @@ let s:enable_highlighting = 1
 function! s:exchange(x, y, reverse, expand)
 	let reg_z = s:save_reg('z')
 	let reg_unnamed = s:save_reg('"')
-	let reg_a = s:save_reg('a')
-	let reg_b = s:save_reg('b')
 	let selection = &selection
 	set selection=inclusive
 
@@ -48,8 +46,6 @@ function! s:exchange(x, y, reverse, expand)
 	let &selection = selection
 	call s:restore_reg('z', reg_z)
 	call s:restore_reg('"', reg_unnamed)
-	call s:restore_reg('a', reg_a)
-	call s:restore_reg('b', reg_b)
 endfunction
 
 function! s:fix_cursor(x, y, reverse)
@@ -105,8 +101,6 @@ endfunction
 
 function! s:exchange_get(type, vis)
 	let reg = s:save_reg('"')
-	let reg_a = s:save_reg('a')
-	let reg_b = s:save_reg('b')
 	if a:vis
 		let type = a:type
 		let [start, end] = s:store_pos("'<", "'>")
@@ -134,8 +128,6 @@ function! s:exchange_get(type, vis)
 	endif
 	let text = getreg('@')
 	call s:restore_reg('"', reg)
-	call s:restore_reg('a', reg_a)
-	call s:restore_reg('b', reg_b)
 	return {
 	\	'text': text,
 	\	'type': type,
