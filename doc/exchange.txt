@@ -27,6 +27,9 @@ cx{motion}              Used in pairs.
                                                 *cxx* *exchange-define-line*
 cxx                     Like |cx|, but for the current line. |linewise|
 
+                                                *cX* *exchange-define-eol*
+cX                      Synonym for |cs$|
+
                                                 *cxc* *exchange-clear*
 cxc                     Clear any defined region of text (previously defined
                         by a |cx| command)
@@ -64,11 +67,21 @@ commands below. The default mappings are as follows:
     nmap cxc <Plug>(ExchangeClear)
     nmap cxx <Plug>(ExchangeLine)
 
-For example, to change the mapping for exchanging a line, use the following:
+Also, for consistency with `D`, `C` and NeoVim's default `Y`, the following
+default mapping is defined:
 
-    nmap cX <Plug>(ExchangeLine)
+    nmap cX cx$
 
-This will use the mapping `cX`, and the default `cxx` will not be mapped.
+Here's an example to defining your own mappings:
+
+    nmap gy <Plug>(ExchangeLine)
+    xmap Y <Plug>(ExchangeLine)
+    nmap gyc <Plug>(ExchangeClear)
+    nmap gyy <Plug>(ExchangeLine)
+    nmap gY gy$
+
+When defining your own mappings, the defaults will not be defined, but `cX`
+will then go to the end of the line because @tuurep didn't think this through!
 
                                                 *g:exchange_no_mappings*
 g:exchange_no_mappings ~
